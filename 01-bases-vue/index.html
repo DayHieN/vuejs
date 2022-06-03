@@ -5,23 +5,30 @@
     <meta charset="UTF-8">
     <script src="https://unpkg.com/vue@3"></script>
     <title>Vue</title>
+    <style>
+        ul {
+            list-style: armenian;
+        }
+    </style>
 </head>
 
 <body>
 
 </body>
-
-
-
-
 <div id="miApp">
-    <button @click="metodo">Pulsa, pulsa</button>
 
+    <label for="add">Añadir a colección: </label><br>
+    <input v-model="newItem" @keypress.enter="addToCollection" type="text" name="add" id="add">
+    <p v-if="newItem">Nuevo: {{newItem}}</p>
+    <ul>
+        <li v-for="({tipo, titulo, ano}) in miColeccion">{{tipo}}: {{titulo}}
+            <small>({{ano}})</small>
+        </li>
+    </ul>
+
+    <h2>{{subtitulo}}</h2>
+    <button v-on:click="metodo">Pulsa, pulsa</button>
 </div>
-
-
-
-
 <script src="app.js"></script>
 
 </html>
