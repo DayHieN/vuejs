@@ -1,14 +1,9 @@
 <template>
-  <img src="https://via.placeholder.com/250" alt="fondo" />
+  <img v-if="imagen" :src="imagen" alt="fondo" />
   <!-- Fondo que oscurece toda la pantalla -->
   <div class="bg-dark"></div>
   <div class="indecision-container">
-    <input
-      type="text"
-      placeholder="¿Qué quieres saber?"
-      v-model="pregunta"
-      v-on:keypress.enter="preguntar"
-    />
+    <input type="text" placeholder="¿Qué quieres saber?" v-model="pregunta" />
     <p>Recuerda terminar con un signo de interrogación (?).</p>
     <div>
       <h2 v-if="pregunta">{{ pregunta }}</h2>
@@ -28,19 +23,18 @@ export default {
   },
   watch: {
     pregunta(nuevoValor) {
-      if (nuevoValor.endsWith("?")) {
-        this.preguntar();
-      }
+      if (!nuevoValor.endsWith("?")) return;
+      this.preguntar();
     },
   },
   methods: {
     async preguntar() {
-      await fetch("https://yesno.wtf/api")
-        .then((response) => response.json())
-        .then((data) => {
-          this.respuesta = data.answer;
-          this.imagen = data.image;
-        });
+      this.respuesta = "Pensando...";
+      const { answer, image } = await fetch("https://yesno.wtf/api").then(
+        (response) => response.json()
+      );
+      this.respuesta = answer;
+      this.imagen = image;
     },
   },
 };
