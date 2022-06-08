@@ -1,9 +1,34 @@
 <template>
   <h3>Vuekemon Opciones</h3>
-  <div></div>
+  <div class="vuopciones-container">
+    <ul>
+      <li>Opción 1</li>
+      <li>Opción 2</li>
+      <li>Opción 3</li>
+      <li>Opción 4</li>
+    </ul>
+  </div>
 </template>
 <script>
 export default {};
 </script>
-<style>
+<style scoped>
+ul {
+  list-style-type: none;
+}
+li {
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  margin-bottom: 10px;
+  width: 250px;
+}
+li:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.vuopciones-container {
+  display: flex;
+  justify-content: center;
+}
 </style>
