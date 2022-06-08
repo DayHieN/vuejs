@@ -6,7 +6,7 @@
     <input type="text" placeholder="¿Qué quieres saber?" v-model="pregunta" />
     <p>Recuerda terminar con un signo de interrogación (?).</p>
     <div>
-      <h2 v-if="pregunta">{{ pregunta }}</h2>
+      <h2 v-if="pregunta">{{ preguntaValida }}</h2>
       <h1 v-if="respuesta">{{ respuesta }}</h1>
     </div>
   </div>
@@ -17,13 +17,15 @@ export default {
   data() {
     return {
       pregunta: "",
-      respuesta: "",
-      imagen: "",
+      preguntaValida: null,
+      respuesta: null,
+      imagen: null,
     };
   },
   watch: {
     pregunta(nuevoValor) {
       if (!nuevoValor.endsWith("?")) return;
+      this.preguntaValida = nuevoValor;
       this.preguntar();
     },
   },
@@ -34,6 +36,9 @@ export default {
         (response) => response.json()
       );
       answer == "yes" ? (this.respuesta = "Sí") : (this.respuesta = "No");
+      if (answer == "maybe") {
+        this.respuesta = "Quizás";
+      }
       this.imagen = image;
     },
   },
