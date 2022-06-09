@@ -1,6 +1,6 @@
 <template>
   <h3>Vuekemon Imagen</h3>
-  <div class="vuekemon-container">
+  <div :class="mountedClass">
     <img :src="srcImg" alt="pokemon" />
   </div>
 </template>
@@ -10,6 +10,8 @@ export default {
     return {
       vuekemonId: null,
       srcImg: null,
+      mountedClass: null,
+      guessedClass: null,
     };
   },
   methods: {
@@ -19,17 +21,23 @@ export default {
     random() {
       this.vuekemonId = parseInt(Math.random() * 600);
     },
+    oscurecerPokemon() {
+      this.mountedClass = "vuekemon-container hidden-vuekemon";
+    },
   },
   beforeMount() {
     this.random();
   },
   mounted() {
+    this.oscurecerPokemon();
     this.obtenerImagen();
   },
 };
 </script>
 <style scoped>
 .vuekemon-container {
+  display:flex;
+  justify-content: center;
   height: 200px;
 }
 img {
@@ -40,7 +48,7 @@ img {
   -webkit-user-drag: none;
   -webkit-user-select: none;
 }
-.hidden-vuokemon {
+.hidden-vuekemon {
   filter: brightness(0);
 }
 </style>

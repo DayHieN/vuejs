@@ -10,7 +10,67 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      i: null,
+      j: null,
+      array: [],
+      shuffledArray: [],
+      primerosCuatro: [, ,],
+      pokemon: null,
+      opciones: [, , ,],
+    };
+  },
+  methods: {
+    crearArray() {
+      for (this.i = 1; this.i <= 600; this.i++) {
+        this.array.push(this.i);
+      }
+    },
+    shuffle(array) {
+      var m = array.length,
+        t,
+        i;
+
+      while (m) {
+        i = Math.floor(Math.random() * m--);
+
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+      }
+
+      return array;
+    },
+    rellenarPkmn() {
+      for (this.j = 0; this.j <= 3; this.j++) {
+        this.primerosCuatro[this.j] = this.shuffledArray[this.j];
+      }
+    },
+    async fetchPokemon() {
+      this.pokemon =
+        this.shuffledArray[
+          parseInt(Math.random() * this.primerosCuatro.length)
+        ];
+
+      const { id } = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${this.pokemon}`
+      ).then((response) => response.json());
+      console.log(id);
+    },
+  },
+  beforeMount() {
+    this.crearArray();
+    console.log(this.array);
+    this.shuffledArray = this.shuffle(this.array);
+    console.log(this.shuffledArray);
+    this.rellenarPkmn();
+    console.log(this.primerosCuatro);
+    this.fetchPokemon();
+    console.log(this.opciones);
+  },
+};
 </script>
 <style scoped>
 ul {
