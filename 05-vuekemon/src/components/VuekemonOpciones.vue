@@ -2,63 +2,28 @@
   <h3>Vuekemon Opciones</h3>
   <div class="vuopciones-container">
     <ul>
-      <li v-for="opcion in listaOpciones" :key="opcion.id">
-        {{ opcion.nombre }}
+      <li
+        v-for="opcion in listaOpciones"
+        :key="opcion.id"
+        @click="$emit('miAnswer', opcion.id)"
+      >
+        {{ opcion.name }}
       </li>
     </ul>
   </div>
 </template>
+
 <script>
 export default {
   props: {
     listaOpciones: {
       type: Array,
+      required: true,
     },
-  },
-  data() {
-    return {
-      i: null,
-      j: null,
-      k: null,
-      array: [],
-      shuffledArray: [],
-
-      opciones: {
-        id: [, ,],
-        nombres: [],
-      },
-    };
-  },
-  methods: {
-    crearArray() {
-      for (this.i = 1; this.i <= 600; this.i++) {
-        this.array.push(this.i);
-      }
-    },
-    shuffle(array) {
-      var m = array.length,
-        t,
-        i;
-
-      while (m) {
-        i = Math.floor(Math.random() * m--);
-
-        t = array[m];
-        array[m] = array[i];
-        array[i] = t;
-      }
-
-      return array;
-    },
-  },
-  beforeMount() {
-    this.crearArray();
-    console.log("array " + this.array);
-    this.shuffledArray = this.shuffle(this.array);
-    console.log("shuffledArray " + this.shuffledArray);
   },
 };
 </script>
+
 <style scoped>
 ul {
   list-style-type: none;

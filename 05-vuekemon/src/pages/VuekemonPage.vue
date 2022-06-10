@@ -4,27 +4,50 @@
     alt="fuente-pokemon"
     border="0"
   />
-  <VuekemonImg :vuekemon-id="idVuekemon" :respuesta="false" />
-  <VuekemonOpciones
-    :lista-opciones="[
-      { id: 25, nombre: 'eustaquio' },
-      { id: 34, nombre: 'patatta' },
-    ]"
-  />
-  <div></div>
+  <div v-if="listaArray">
+    <VuekemonImg :vuekemon-id="pokemon.id" :respuesta="hayRespuesta" />
+    <VuekemonOpciones
+      @mi-answer="activarRespuesta"
+      :lista-opciones="listaArray"
+    />
+    {{ msg }}
+  </div>
 </template>
+
 <script>
+import getPokemonOptions from "@/helpers/vuekemonUtilidades.js";
 import VuekemonImg from "@/components/VuekemonImg.vue";
 import VuekemonOpciones from "@/components/VuekemonOpciones.vue";
+
 export default {
   data() {
     return {
-      idVuekemon: 3,
+      pokemon: null,
+      hayRespuesta: false,
+      listaArray: null,
     };
   },
   components: {
     VuekemonImg,
     VuekemonOpciones,
+  },
+  methods: {
+    activarRespuesta(data) {
+      this.hayRespuesta = true;
+      if (data === this.pokemon.id) {
+        this.msg = `Correcto ${this.pokemon.name}`;
+      } else {
+        this.msg = `Fallaste, era ${this.pokemon.name}`;
+      }
+    },
+    async cargar() {
+      this.listaArray = await getPokemonOptions();
+      const rndInt = Math.floor(Math.random() * 4);
+      this.pokemon = this.listaArray[rndInt];
+    },
+  },
+  mounted() {
+    this.cargar();
   },
 };
 </script>
