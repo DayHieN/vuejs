@@ -1,42 +1,36 @@
 <template>
   <h3>Vuekemon Imagen</h3>
-  <div :class="mountedClass">
-    <img :src="srcImg" alt="pokemon" />
+  <div class="vuekemon-container">
+    <img v-if="respuesta" class="fade-in" :src="srcImg" alt="pokemon" />
+    <img v-else class="fade-in hidden-vuekemon" :src="srcImg" alt="pokemon" />
   </div>
 </template>
 <script>
 export default {
+  props: {
+    vuekemonId: {
+      type: Number,
+      required: true,
+    },
+    respuesta: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
-    return {
-      vuekemonId: null,
-      srcImg: null,
-      mountedClass: null,
-      guessedClass: null,
-    };
+    return {};
   },
-  methods: {
-    obtenerImagen() {
-      this.srcImg = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${this.vuekemonId}.svg`;
+
+  computed: {
+    srcImg: function () {
+      return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${this.vuekemonId}.svg`;
     },
-    random() {
-      this.vuekemonId = parseInt(Math.random() * 600);
-    },
-    oscurecerPokemon() {
-      this.mountedClass = "vuekemon-container hidden-vuekemon";
-    },
-  },
-  beforeMount() {
-    this.random();
-  },
-  mounted() {
-    this.oscurecerPokemon();
-    this.obtenerImagen();
   },
 };
 </script>
 <style scoped>
 .vuekemon-container {
-  display:flex;
+  display: flex;
   justify-content: center;
   height: 200px;
 }

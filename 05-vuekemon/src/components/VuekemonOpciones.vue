@@ -2,24 +2,31 @@
   <h3>Vuekemon Opciones</h3>
   <div class="vuopciones-container">
     <ul>
-      <li>Opción 1</li>
-      <li>Opción 2</li>
-      <li>Opción 3</li>
-      <li>Opción 4</li>
+      <li v-for="opcion in listaOpciones" :key="opcion.id">
+        {{ opcion.nombre }}
+      </li>
     </ul>
   </div>
 </template>
 <script>
 export default {
+  props: {
+    listaOpciones: {
+      type: Array,
+    },
+  },
   data() {
     return {
       i: null,
       j: null,
+      k: null,
       array: [],
       shuffledArray: [],
-      primerosCuatro: [, ,],
-      pokemon: null,
-      opciones: [, , ,],
+
+      opciones: {
+        id: [, ,],
+        nombres: [],
+      },
     };
   },
   methods: {
@@ -43,32 +50,12 @@ export default {
 
       return array;
     },
-    rellenarPkmn() {
-      for (this.j = 0; this.j <= 3; this.j++) {
-        this.primerosCuatro[this.j] = this.shuffledArray[this.j];
-      }
-    },
-    async fetchPokemon() {
-      this.pokemon =
-        this.shuffledArray[
-          parseInt(Math.random() * this.primerosCuatro.length)
-        ];
-
-      const { id } = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${this.pokemon}`
-      ).then((response) => response.json());
-      console.log(id);
-    },
   },
   beforeMount() {
     this.crearArray();
-    console.log(this.array);
+    console.log("array " + this.array);
     this.shuffledArray = this.shuffle(this.array);
-    console.log(this.shuffledArray);
-    this.rellenarPkmn();
-    console.log(this.primerosCuatro);
-    this.fetchPokemon();
-    console.log(this.opciones);
+    console.log("shuffledArray " + this.shuffledArray);
   },
 };
 </script>
