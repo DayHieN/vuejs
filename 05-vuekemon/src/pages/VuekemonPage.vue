@@ -1,5 +1,9 @@
 <template>
-  <h1>¿Cuál es este Pokémon?</h1>
+  <img
+    src="https://fontmeme.com/permalink/220610/da2095bb695d0081b93aa40d7016514b.png"
+    alt="fuente-pokemon"
+    border="0"
+  />
   <VuekemonImg :vuekemon-id="idVuekemon" :respuesta="false" />
   <VuekemonOpciones
     :lista-opciones="[
