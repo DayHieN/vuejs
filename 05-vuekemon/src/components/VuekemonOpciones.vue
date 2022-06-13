@@ -1,5 +1,8 @@
 <template>
+<<<<<<< HEAD
   
+=======
+>>>>>>> 669896b10da9021a6b968f561a3f6b2dc9886101
   <div class="vuopciones-container">
     <ul>
       <li
@@ -46,7 +49,11 @@ li:hover {
 }
 .vuopciones-container {
   position: relative;
+<<<<<<< HEAD
   right: 18px;
+=======
+  right: 22px;
+>>>>>>> 669896b10da9021a6b968f561a3f6b2dc9886101
   display: flex;
   justify-content: center;
 }

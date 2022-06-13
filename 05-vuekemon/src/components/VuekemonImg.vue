@@ -1,5 +1,8 @@
 <template>
+<<<<<<< HEAD
  
+=======
+>>>>>>> 669896b10da9021a6b968f561a3f6b2dc9886101
   <div class="vuekemon-container">
     <img v-if="respuesta" class="fade-in" :src="srcImg" alt="pokemon" />
     <img v-else class="fade-in hidden-vuekemon" :src="srcImg" alt="pokemon" />

@@ -7,12 +7,18 @@
   <div v-if="listaArray">
     <VuekemonImg :vuekemon-id="pokemon.id" :respuesta="hayRespuesta" />
     <VuekemonOpciones
+<<<<<<< HEAD
       @mi-respuesta="activarRespuesta"
+=======
+      v-if="!hayRespuesta"
+      @mi-answer="activarRespuesta"
+>>>>>>> 669896b10da9021a6b968f561a3f6b2dc9886101
       :lista-opciones="listaArray"
       
     />
     <h3>{{ msg }}</h3>
   </div>
+  <button v-if="hayRespuesta" @click="newGame">Jugar de nuevo</button>
 </template>
 
 <script>
@@ -26,6 +32,7 @@ export default {
       pokemon: null,
       hayRespuesta: false,
       listaArray: null,
+      msg: null,
     };
   },
   components: {
@@ -38,13 +45,24 @@ export default {
       if (data === this.pokemon.id) {
         this.msg = `¡Correcto! ¡Es ${this.pokemon.name}!`;
       } else {
+<<<<<<< HEAD
         this.msg = `¡Qué pena! ¡Es ${this.pokemon.name}!`;
+=======
+        this.msg = `¡Fallaste! ¡Es ${this.pokemon.name}!`;
+>>>>>>> 669896b10da9021a6b968f561a3f6b2dc9886101
       }
     },
     async cargar() {
       this.listaArray = await getPokemonOptions();
       const rndInt = Math.floor(Math.random() * 4);
       this.pokemon = this.listaArray[rndInt];
+    },
+    newGame() {
+      this.pokemon = null;
+      this.hayRespuesta = false;
+      this.listaArray = null;
+      this.msg = null;
+      this.cargar();
     },
   },
   mounted() {
