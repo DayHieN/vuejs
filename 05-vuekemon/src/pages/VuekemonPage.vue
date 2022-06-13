@@ -7,10 +7,11 @@
   <div v-if="listaArray">
     <VuekemonImg :vuekemon-id="pokemon.id" :respuesta="hayRespuesta" />
     <VuekemonOpciones
-      @mi-answer="activarRespuesta"
+      @mi-respuesta="activarRespuesta"
       :lista-opciones="listaArray"
+      
     />
-    {{ msg }}
+    <h3>{{ msg }}</h3>
   </div>
 </template>
 
@@ -35,9 +36,9 @@ export default {
     activarRespuesta(data) {
       this.hayRespuesta = true;
       if (data === this.pokemon.id) {
-        this.msg = `Correcto ${this.pokemon.name}`;
+        this.msg = `¡Correcto! ¡Es ${this.pokemon.name}!`;
       } else {
-        this.msg = `Fallaste, era ${this.pokemon.name}`;
+        this.msg = `¡Qué pena! ¡Es ${this.pokemon.name}!`;
       }
     },
     async cargar() {

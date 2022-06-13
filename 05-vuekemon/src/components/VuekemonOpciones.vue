@@ -1,15 +1,18 @@
 <template>
-  <h3>Vuekemon Opciones</h3>
+  
   <div class="vuopciones-container">
     <ul>
       <li
         v-for="opcion in listaOpciones"
         :key="opcion.id"
-        @click="$emit('miAnswer', opcion.id)"
+        @click="$emit('miRespuesta', opcion.id)"
       >
         {{ opcion.name }}
       </li>
     </ul>
+  </div>
+  <div>
+    <button>Jugar otra vez</button>
   </div>
 </template>
 
@@ -25,10 +28,9 @@ export default {
 </script>
 
 <style scoped>
-ul {
-  list-style-type: none;
-}
+
 li {
+  list-style:none;
   background-color: white;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -39,7 +41,12 @@ li {
 li:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
+.correcto{
+  background-color: greenyellow;
+}
 .vuopciones-container {
+  position: relative;
+  right: 18px;
   display: flex;
   justify-content: center;
 }
