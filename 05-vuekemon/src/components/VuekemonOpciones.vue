@@ -1,5 +1,4 @@
 <template>
-  <h3>Vuekemon Opciones</h3>
   <div class="vuopciones-container">
     <ul>
       <li
@@ -40,6 +39,8 @@ li:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
 .vuopciones-container {
+  position: relative;
+  right: 22px;
   display: flex;
   justify-content: center;
 }
